@@ -18,12 +18,18 @@ const LoginCMD = () => {
 
 const LoginCDMTop = () => {
   return (
-    <div className="grid w-full h-10 bg-gray-46 rounded-t-lg">
-      <div className="grid grid-cols-3 w-full h-full">
-        <div className="grid place-items-center">
+    <div className="grid px-2 grid-cols-2 justify-between w-full h-8 bg-gray-46 rounded-t-lg ">
+      {/* 黑色Tab */}
+      <div className="grid self-end w-48 h-4/5">
+        <div className="rounded-t-lg bg-black text-center text-xs px-2 ">
+          [react-admin-study]&nbsp;&nbsp;Login
+        </div>
+      </div>
+      <div className="grid  w-full h-full justify-between">
+        <div className="grid">
           <div className="w-4 h-4 bg-green-500 rounded-full"></div>
         </div>
-        <div className="grid place-items-center">
+        <div className="grid">
           <div className="w-4 h-4 bg-red-500 rounded-full"></div>
         </div>
       </div>
