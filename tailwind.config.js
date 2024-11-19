@@ -6,7 +6,10 @@ export default {
       colors: {
         'gray-46': 'rgb(46,46,46)',
         'black-23': 'rgb(14, 17, 23)'
-      }
+      },
+      fontSize: {
+        'xsl': '0.75rem'
+      },
     },
   },
   plugins: [],
