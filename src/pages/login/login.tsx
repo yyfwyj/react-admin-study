@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
-import { get, post } from "@api/request/funcRequest"; // 确保这里的路径是正确的
+import CommandParser from '@utils/Command/CommandParser'
+
+
 
 const Login = () => {
   return (
@@ -32,17 +34,22 @@ const LoginCDMTop = () => {
 };
 
 const LoginCDMContent = () => {
+
+  const commandParser = new CommandParser();
+
   const enterDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Enter") {
       event.preventDefault(); // 阻止默认的Enter键行为
       // 获取当前编辑框的内容
       const target = event.target as HTMLDivElement;
       const text = target.innerText;
-      text.split(" ").forEach((item) => {
-        console.log(item);
-      });
-      console.log(text);
-      get("/api/login", { username: "admin", password: "123456" });
+      // text.split(" ").forEach((item) => {
+      //   console.log(item);
+      // });
+      // console.log(text);
+
+      commandParser.parseAndExecute(text);
+
     }
   };
 
