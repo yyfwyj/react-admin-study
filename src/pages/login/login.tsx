@@ -1,12 +1,13 @@
-import React, { useRef } from 'react'
+import React, { useRef } from "react";
+import { get, post } from "@api/request/funcRequest"; // 确保这里的路径是正确的
 
 const Login = () => {
   return (
     <div className="grid place-items-center w-screen h-screen bg-black-23 font-mono">
       <LoginCMD></LoginCMD>
     </div>
-  )
-}
+  );
+};
 
 const LoginCMD = () => {
   return (
@@ -14,8 +15,8 @@ const LoginCMD = () => {
       <LoginCDMTop></LoginCDMTop>
       <LoginCDMContent></LoginCDMContent>
     </div>
-  )
-}
+  );
+};
 
 const LoginCDMTop = () => {
   return (
@@ -27,13 +28,23 @@ const LoginCDMTop = () => {
         </span>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const LoginCDMContent = () => {
   const enterDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    console.log(event)
-  }
+    if (event.key === "Enter") {
+      event.preventDefault(); // 阻止默认的Enter键行为
+      // 获取当前编辑框的内容
+      const target = event.target as HTMLDivElement;
+      const text = target.innerText;
+      text.split(" ").forEach((item) => {
+        console.log(item);
+      });
+      console.log(text);
+      get("/api/login", { username: "admin", password: "123456" });
+    }
+  };
 
   return (
     <div className="text-sm w-full h-full p-2">
@@ -42,7 +53,7 @@ const LoginCDMContent = () => {
         <p>(c) 2024 yyfwyj。保留所有权利。</p>
       </div>
       <div className="flex items-center">
-        <div>C:\Users\Login&gt;</div>
+        <div>C:\Users&gt;</div>
         <div
           contentEditable="true"
           className="flex-1 ml-2 focus:outline-none"
@@ -52,7 +63,7 @@ const LoginCDMContent = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
