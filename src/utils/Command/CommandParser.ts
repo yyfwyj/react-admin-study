@@ -29,13 +29,13 @@ export default class CommandParser {
     }
 
     // 根据输入的命令以及参数执行命令
-    public parseAndExecute(commandLine: string): void {
+    public parseAndExecute(commandLine: string): any | void {
         const args = commandLine.split(' ');
         const commandName = args.shift();
         if (commandName) {
             const command = this.commands[commandName];
             if (command) {
-                command.execute(args);
+                return command.execute(args);
             } else {
                 console.error(`Unknown command: ${commandName}`);
             }

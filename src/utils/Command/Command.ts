@@ -3,6 +3,6 @@
  * @property {string[]} execute 执行命令
  */
 export interface Command {
-    commandName: string;
-    execute(args: string[]): void;
+  commandName: string;
+  execute(args: string[]): any | void;
 }

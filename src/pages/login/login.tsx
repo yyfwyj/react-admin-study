@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
-import CommandParser from '@utils/Command/CommandParser'
-
-
+import CommandParser from "@utils/Command/CommandParser";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -34,22 +33,21 @@ const LoginCDMTop = () => {
 };
 
 const LoginCDMContent = () => {
-
   const commandParser = new CommandParser();
+  const navigate = useNavigate();
 
-  const enterDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+  const enterDown = async (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Enter") {
       event.preventDefault(); // 阻止默认的Enter键行为
       // 获取当前编辑框的内容
       const target = event.target as HTMLDivElement;
       const text = target.innerText;
-      // text.split(" ").forEach((item) => {
-      //   console.log(item);
-      // });
-      // console.log(text);
+      const res = await commandParser.parseAndExecute(text);
+      console.log(res, 123);
 
-      commandParser.parseAndExecute(text);
-
+      if (res) {
+        navigate("/home");
+      }
     }
   };
 
