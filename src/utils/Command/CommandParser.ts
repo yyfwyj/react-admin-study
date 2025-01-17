@@ -41,4 +41,9 @@ export default class CommandParser {
             }
         }
     }
+
+    // 检查命令是否存在
+    public inspectCommand(commandName: string): boolean {
+        return commandName in this.commands;
+    }
 }

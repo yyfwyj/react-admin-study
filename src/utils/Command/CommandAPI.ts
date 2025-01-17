@@ -29,7 +29,20 @@ class LoginCommand implements Command {
   }
 }
 
+class RegisterCommand implements Command {
+  public commandName = "register";
+  async execute(args: string[]): Promise<any | void> {
+    const res = await post("/api/admin/auth/register", {
+      username: args[0],
+      password: args[1],
+    });
+
+    return res;
+  }
+}
+
 export const CommandAPI = {
   HelpCommand,
   LoginCommand,
+  RegisterCommand,
 };

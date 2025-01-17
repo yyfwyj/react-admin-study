@@ -1,6 +1,9 @@
-// 引入配置方法
 import { configureStore } from "@reduxjs/toolkit";
 
+import loginSlice from "./module/login";
+
 export default configureStore({
-    reducer: {}
-})
+  reducer: {
+    login: loginSlice.reducer,
+  },
+});
