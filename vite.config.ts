@@ -11,6 +11,7 @@ export default defineConfig({
       "@components": path.resolve(__dirname, "src/components"),
       "@utils": path.resolve(__dirname, "src/utils"),
       "@hooks": path.resolve(__dirname, "src/hooks"),
+      "@types": path.resolve(__dirname, "src/types"),
     },
   },
   // 设置API代理转发

@@ -25,6 +25,19 @@ const loginSlice = createSlice({
     updateCommand: (state, action) => {
       state.loginCMDArr[state.loginCMDArr.length - 1] = action.payload;
     },
+
+    errorCommand: (state, action) => {
+      state.loginCMDArr[state.loginCMDArr.length - 1] = {
+        initialText: "C:Users/：",
+        inputText: action.payload,
+        errorText: `'${action.payload}'不是内部或外部命令，也不是可运行的程序`,
+      };
+      state.loginCMDArr.push({
+        initialText: "C:Users/：",
+        inputText: "",
+        errorText: "",
+      });
+    },
   },
 });
 

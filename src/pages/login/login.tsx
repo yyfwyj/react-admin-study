@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginCMDState } from "@/types";
 import loginSlice from "@/store/module/login";
+import { useCommandManager } from "@/utils/Command/useCommandManager";
 
 const Login = () => {
   return (
@@ -42,6 +43,9 @@ const LoginCDMContent = () => {
     (state: { login: LoginCMDState }) => state.login.loginCMDArr
   );
 
+  // 获取命令执行器
+  const { executeCommand } = useCommandManager();
+
   // 让最后一个输入元素自动获取焦点，并且添加全局监听事件，保证焦点一直在输入框聚焦
   const lastCommandRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -79,32 +83,18 @@ const LoginCDMContent = () => {
       event.preventDefault();
       // 获取当前编辑框的内容
       const target = event.target as HTMLDivElement;
-      const text = target.innerText;
+      const commandText = target.innerText.trim();
+      
+      // 执行命令
+      await executeCommand(commandText);
 
-      const isCommand = commandParser.inspectCommand(text);
+      // if (commandParser.inspectCommand(text)) {
+      //   await commandParser.parseAndExecute(text);
+      // } else {
+      //   dispatch(loginSlice.actions.errorCommand(text));
+      // }
 
-      if (isCommand) {
-        // const res = await commandParser.parseAndExecute(text);
-        await commandParser.parseAndExecute(text);
-        // navigate("/home");
-      } else {
-        dispatch(
-          loginSlice.actions.updateCommand({
-            initialText: "C:Users/：",
-            inputText: text,
-            errorText: `'${text}'不是内部或外部命令，也不是可运行的程序`,
-          })
-        );
-        dispatch(
-          loginSlice.actions.addCommand({
-            initialText: "C:Users/：",
-            inputText: "",
-            errorText: "",
-          })
-        );
-      }
-
-      console.log(loginCMDArr);
+      // console.log(loginCMDArr);
     }
   };
 
@@ -129,7 +119,7 @@ const LoginCDMContent = () => {
                 {/* 初始值可以放在这里 */}
               </div>
             </div>
-            <div>{item.errorText}</div>
+            <div className="mb-5">{item.errorText}</div>
           </div>
         ))}
       </div>
