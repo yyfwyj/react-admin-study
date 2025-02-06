@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import CommandParser from "@utils/Command/CommandParser";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginCMDState } from "@/types";
@@ -42,7 +41,7 @@ const LoginCDMContent = () => {
   const loginCMDArr = useSelector(
     (state: { login: LoginCMDState }) => state.login.loginCMDArr
   );
-
+  console.log(loginCMDArr,'loginCMDArr');
   // 获取命令执行器
   const { executeCommand } = useCommandManager();
 
@@ -74,7 +73,6 @@ const LoginCDMContent = () => {
     };
   }, [loginCMDArr]);
 
-  const commandParser = new CommandParser();
   const navigate = useNavigate();
 
   const enterDown = async (event: React.KeyboardEvent<HTMLDivElement>) => {

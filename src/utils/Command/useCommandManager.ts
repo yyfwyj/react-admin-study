@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Command } from "@/types/components/command/commandTypes";
 import { COMMANDS } from "./Commands";
 import loginSlice from "@/store/module/login";
@@ -8,6 +9,7 @@ import loginSlice from "@/store/module/login";
  */
 export const useCommandManager = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   /**
    * 根据命令名称查找对应命令
@@ -33,7 +35,7 @@ export const useCommandManager = () => {
     }
 
     // 执行命令逻辑
-    await command.executor(args, dispatch);
+    await command.executor(args, dispatch, navigate);
   };
 
   return { executeCommand };

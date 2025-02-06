@@ -1,11 +1,15 @@
 import { post } from "@/api/request/funcRequest";
 import loginSlice from "@/store/module/login";
-import { CommandExecutor,Command } from "@/types/components/command/commandTypes";
+import {
+  CommandExecutor,
+  Command,
+} from "@/types/components/command/commandTypes";
+import userSlice from "@/store/module/user";
 
 /**
  * 登录命令实现
  */
-const loginExecutor: CommandExecutor = async (args, dispatch) => {
+const loginExecutor: CommandExecutor = async (args, dispatch, navigate) => {
   if (args.length < 2) {
     dispatch(
       loginSlice.actions.errorCommand(
@@ -21,9 +25,15 @@ const loginExecutor: CommandExecutor = async (args, dispatch) => {
       username: args[0],
       password: args[1],
     });
-    if (res) {
+    if (res.data?.success) {
+      // 处理登录成功的逻辑
+      const { token } = res.data.data;
+      dispatch(userSlice.actions.setUserInfo(res.data.data));
+      navigate && navigate("/home");
     } else {
-      //   dispatch(loginSlice.actions.errorCommand(res.message || "登录失败"));
+      dispatch(
+        loginSlice.actions.errorCommand(res.data?.message || "登录失败")
+      );
     }
   } catch (error) {
     dispatch(loginSlice.actions.errorCommand("网络请求失败"));

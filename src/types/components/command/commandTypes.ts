@@ -1,3 +1,4 @@
+import { NavigateFunction } from 'react-router-dom';
 
 /**
  * 命令执行函数类型
@@ -6,8 +7,9 @@
  */
 export type CommandExecutor = (
     args: string[],
-    dispatch: any
-) => Promise<void> | void;
+    dispatch: any,
+    navigate?: NavigateFunction
+) => void | Promise<void>;
 
 /**
  * 命令对象结构
